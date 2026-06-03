@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DKE Parts Private Limited — HR Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0f1f3d;--navy2:#1a3260;--gold:#c9973b;--gold2:#e8bf7a;--goldpale:#fdf6ec;--cream:#f7f7f5;--white:#fff;--txt:#1a1a2e;--mid:#4a4a6a;--muted:#8a8aaa;--bdr:rgba(15,31,61,.10);--bdrgold:rgba(201,151,59,.32);--sh:0 2px 16px rgba(15,31,61,.07);--shh:0 10px 36px rgba(15,31,61,.13);--r:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}a{text-decoration:none;color:inherit;}button{font-family:'DM Sans',sans-serif;cursor:pointer;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--txt);min-height:100vh;}
+nav{background:var(--navy);position:sticky;top:0;z-index:200;border-bottom:2px solid var(--gold);}
+.navi{max-width:1240px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.lm{width:32px;height:32px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--navy);flex-shrink:0;}
+.lt span:first-child{display:block;font-size:12.5px;font-weight:600;color:#fff;}
+.lt span:last-child{display:block;font-size:9px;color:var(--gold2);letter-spacing:1.2px;text-transform:uppercase;}
+.navlinks{display:flex;gap:2px;list-style:none;}
+.navlinks li button{background:none;border:none;color:rgba(255,255,255,.65);font-size:12px;font-weight:500;padding:5px 9px;border-radius:6px;transition:all .2s;}
+.navlinks li button:hover{color:#fff;background:rgba(255,255,255,.08);}
+.navlinks li button.active{color:var(--gold2);background:rgba(201,151,59,.15);}
+.hasdrop{position:relative;}
+.hasdrop:hover .dropdown,.hasdrop:focus-within .dropdown{display:flex;}
+.dropdown{display:none;position:absolute;top:100%;left:0;background:var(--navy);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:6px;flex-direction:column;min-width:210px;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.dropdown button{color:rgba(255,255,255,.7);font-size:12px;padding:7px 12px;border-radius:5px;text-align:left;white-space:nowrap;background:none;border:none;}
+.dropdown button:hover{background:rgba(255,255,255,.1);color:#fff;}
+.ham{display:none;background:none;border:none;color:#fff;font-size:22px;padding:4px;}
+.mobmenu{display:none;position:fixed;top:60px;left:0;right:0;background:var(--navy);border-top:1px solid rgba(255,255,255,.1);z-index:199;padding:.8rem;flex-direction:column;gap:3px;max-height:calc(100vh - 60px);overflow-y:auto;}
+.mobmenu.open{display:flex;}
+.mobmenu > button{background:none;border:none;color:rgba(255,255,255,.7);font-size:13px;font-weight:500;text-align:left;padding:9px 14px;border-radius:7px;}
+.mobmenu > button:hover,.mobmenu > button.active{background:rgba(201,151,59,.15);color:var(--gold2);}
+.mobsub > button{background:none;border:none;color:rgba(255,255,255,.45);font-size:12px;text-align:left;padding:7px 14px 7px 30px;border-radius:6px;display:block;width:100%;}
+.mobsub > button:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);}
+.page{display:none;animation:fup .3s ease;}
+.page.active{display:block;}
+@keyframes fup{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.ann{background:var(--goldpale);border-bottom:1px solid var(--bdrgold);padding:8px 1.5rem;}
+.anni{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:9px;}
+.apill{background:var(--gold);color:var(--navy);font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:4px;text-transform:uppercase;white-space:nowrap;}
+.hero{background:linear-gradient(130deg,var(--navy) 0%,var(--navy2) 55%,#243a70 100%);padding:4rem 1.5rem 3rem;position:relative;overflow:hidden;}
+.hr1,.hr2{position:absolute;border-radius:50%;pointer-events:none;border:1px solid rgba(201,151,59,.12);}
+.hr1{width:400px;height:400px;top:-110px;right:-90px;}
+.hr2{width:240px;height:240px;top:-55px;right:-35px;border-color:rgba(201,151,59,.22);}
+.heroi{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 220px;gap:2.5rem;align-items:center;}
+.heye{display:inline-flex;align-items:center;gap:6px;background:rgba(201,151,59,.13);border:1px solid rgba(201,151,59,.28);color:var(--gold2);font-size:10px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:1rem;}
+.heye::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.2vw,2.7rem);font-weight:600;color:#fff;line-height:1.2;margin-bottom:.8rem;}
+.hero h1 em{color:var(--gold2);font-style:normal;}
+.hero p{font-size:14.5px;color:rgba(255,255,255,.58);line-height:1.75;max-width:480px;margin-bottom:1.6rem;}
+.hcta{display:flex;gap:9px;flex-wrap:wrap;}
+.btnp{background:var(--gold);color:var(--navy);padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;border:none;transition:all .2s;cursor:pointer;}
+.btnp:hover{background:var(--gold2);transform:translateY(-1px);}
+.btno{background:transparent;color:rgba(255,255,255,.8);padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid rgba(255,255,255,.2);transition:all .2s;cursor:pointer;}
+.btno:hover{border-color:var(--gold);color:var(--gold2);}
+.ccard{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:14px;padding:1.3rem;text-align:center;backdrop-filter:blur(4px);}
+.cavt{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--navy);margin:0 auto .8rem;border:3px solid rgba(201,151,59,.35);}
+.ccard h3{font-size:13.5px;font-weight:600;color:#fff;margin-bottom:3px;}
+.crole{font-size:11px;color:var(--gold2);margin-bottom:.9rem;}
+.cinfo{display:flex;flex-direction:column;gap:5px;}
+.crow{display:flex;align-items:center;gap:7px;font-size:11px;color:rgba(255,255,255,.55);}
+.cico{width:12px;height:12px;color:var(--gold);flex-shrink:0;}
+.cnt{max-width:1240px;margin:0 auto;padding:2.5rem 1.5rem;}
+.sh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.3rem;}
+.st{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--navy);}
+.sl{font-size:13px;color:var(--gold);font-weight:500;cursor:pointer;}
+.sl:hover{text-decoration:underline;}
+.pbanner{background:var(--navy);padding:2rem 1.5rem;border-bottom:2px solid var(--gold);}
+.pbanneri{max-width:1240px;margin:0 auto;}
+.pcrumb{font-size:11px;color:rgba(255,255,255,.38);letter-spacing:.4px;margin-bottom:.4rem;text-transform:uppercase;}
+.pcrumb a{color:var(--gold2);cursor:pointer;}
+.pbanner h2{font-family:'Playfair Display',serif;font-size:1.7rem;color:#fff;font-weight:600;}
+.pbanner p{font-size:13.5px;color:rgba(255,255,255,.5);margin-top:.3rem;}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:13px;margin-bottom:2.5rem;}
+.card{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:1.3rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.card:hover{box-shadow:var(--shh);transform:translateY(-3px);border-color:var(--bdrgold);}
+.card:hover::before{transform:scaleX(1);}
+.cico2{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:.8rem;}
+.ib{background:#eef4fd;}.ig{background:#edf7f0;}.ia{background:#fef9ec;}.ir{background:#fef0ee;}.ip{background:#f2effe;}.it{background:#edf9f5;}
+.card h3{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:3px;}
+.card p{font-size:12px;color:var(--muted);line-height:1.5;}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px;margin-bottom:2.5rem;}
+.fi{background:var(--white);border:1px solid var(--bdr);border-radius:10px;padding:.85rem 1.1rem;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .2s;color:inherit;}
+.fi:hover{border-color:var(--bdrgold);background:var(--goldpale);transform:translateX(4px);}
+.fdot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.fname{font-size:13.5px;font-weight:500;color:var(--navy);flex:1;}
+.farr{color:var(--muted);font-size:15px;}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:2.5rem;}
+.tc{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:1.2rem;cursor:pointer;transition:all .2s;display:block;}
+.tc:hover{border-color:var(--bdrgold);box-shadow:var(--sh);transform:translateY(-2px);}
+.ttag{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:.6rem;}
+.tblue{background:#eef4fd;color:#1a5fb4;}.tgreen{background:#edf7f0;color:#1a6b35;}.tamb{background:#fef9ec;color:#8a6a00;}.tpurp{background:#f2effe;color:#5e3fb3;}.tteal{background:#edf9f5;color:#0f7060;}.tred{background:#fef0ee;color:#b33;}
+.tc h4{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:3px;}
+.tc p{font-size:12px;color:var(--muted);line-height:1.5;}
+.calembed{width:100%;height:500px;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;background:var(--white);margin-bottom:2.5rem;}
+.calembed iframe{width:100%;height:100%;border:none;}
+.momsec{margin-bottom:1.8rem;}
+.momdate{font-size:12px;font-weight:600;color:var(--navy);background:var(--goldpale);border:1px solid var(--bdrgold);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:.7rem;}
+.momul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.momli{display:flex;gap:8px;font-size:13px;color:var(--mid);align-items:flex-start;line-height:1.6;}
+.momn{font-size:10px;font-weight:700;color:var(--gold);width:16px;flex-shrink:0;margin-top:3px;}
+.momsub{margin-top:.4rem;padding-left:18px;}
+.momsub li{font-size:12px;color:var(--mid);line-height:1.65;list-style:disc;padding-left:4px;margin-bottom:2px;}
+.psec{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:10px;overflow:hidden;}
+.psech{padding:1rem 1.2rem;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
+.psech:hover{background:var(--goldpale);}
+.psec-icon{font-size:20px;width:36px;text-align:center;flex-shrink:0;}
+.psec-ti{flex:1;}
+.psec-ti h4{font-size:14px;font-weight:600;color:var(--navy);}
+.psec-arr{color:var(--muted);font-size:16px;transition:transform .2s;}
+.psec.open .psec-arr{transform:rotate(180deg);}
+.psec-body{display:none;padding:0 1.2rem 1.2rem;border-top:1px solid var(--bdr);}
+.psec.open .psec-body{display:block;}
+.psec-body p,.psec-body li{font-size:13px;color:var(--mid);line-height:1.7;}
+.psec-body h5{font-size:13px;font-weight:600;color:var(--navy);margin:1rem 0 .4rem;}
+.psec-body h6{font-size:12px;font-weight:600;color:var(--navy);margin:.7rem 0 .3rem;}
+.psec-body ul,.psec-body ol{padding-left:1.4rem;margin:.4rem 0;}
+.psec-body .formlink{display:inline-flex;align-items:center;gap:7px;background:var(--goldpale);border:1px solid var(--bdrgold);color:var(--gold);font-size:13px;font-weight:500;padding:7px 14px;border-radius:7px;margin-top:.8rem;}
+.psec-body .formlink:hover{background:var(--gold);color:var(--navy);}
+.ptable{width:100%;border-collapse:collapse;margin:.5rem 0;font-size:12px;}
+.ptable th{background:var(--goldpale);color:var(--navy);font-weight:600;padding:7px 10px;text-align:left;border:1px solid var(--bdrgold);}
+.ptable td{padding:6px 10px;border:1px solid var(--bdr);color:var(--mid);}
+.peogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px;margin-bottom:2.5rem;}
+.peocard{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:1.1rem .9rem;text-align:center;cursor:pointer;transition:all .2s;}
+.peocard:hover{box-shadow:var(--shh);border-color:var(--bdrgold);transform:translateY(-2px);}
+.peoav{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;margin:0 auto .6rem;color:#fff;}
+.peocard h4{font-size:12.5px;font-weight:600;color:var(--navy);}
+.peodept{font-size:11px;color:var(--muted);margin-top:2px;}
+.ibox{background:var(--goldpale);border:1px solid var(--bdrgold);border-radius:9px;padding:.9rem 1.1rem;font-size:13px;color:var(--mid);margin-bottom:1.4rem;display:flex;gap:9px;align-items:flex-start;}
+.iii{font-size:17px;flex-shrink:0;}
+.jobmpty{background:var(--white);border:1px dashed var(--bdrgold);border-radius:var(--r);padding:2.5rem;text-align:center;margin-bottom:2.5rem;}
+.jobmpty .ji{font-size:34px;margin-bottom:9px;}
+.jobmpty p{font-size:14px;color:var(--muted);}
+.backbtn{display:inline-flex;align-items:center;gap:5px;background:none;border:none;color:var(--gold);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:1.1rem;padding:0;}
+.backbtn:hover{text-decoration:underline;}
+.swrap{position:relative;margin-bottom:1.4rem;max-width:400px;}
+.swrap input{width:100%;background:var(--white);border:1px solid var(--bdr);border-radius:9px;padding:9px 14px 9px 38px;font-size:13.5px;color:var(--txt);outline:none;font-family:'DM Sans',sans-serif;}
+.swrap input:focus{border-color:var(--bdrgold);}
+.sico{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;}
+footer{background:var(--navy);padding:1.6rem 1.5rem;text-align:center;color:rgba(255,255,255,.35);font-size:12px;border-top:2px solid var(--gold);}
+footer a{color:var(--gold2);}
+footer p+p{margin-top:3px;}
+@media(max-width:860px){.heroi{grid-template-columns:1fr;}.ccard{display:none;}.navlinks{display:none;}.ham{display:block;}}
+@media(max-width:520px){.cnt{padding:1.5rem 1rem;}.hero{padding:2.8rem 1rem 2.2rem;}.pbanner{padding:1.5rem 1rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="navi">
+    <div class="logo" onclick="go('home')">
+      <div class="lm">DK</div>
+      <div class="lt"><span>DKE Parts Private Limited</span><span>HR Portal</span></div>
+    </div>
+    <ul class="navlinks">
+      <li><button class="active" data-p="home" onclick="go('home')">Home</button></li>
+      <li class="hasdrop">
+        <button data-p="automation" onclick="go('automation')">Automation &#9662;</button>
+        <div class="dropdown">
+          <button onclick="go('delegation')">Automated Delegation Sheet</button>
+          <button onclick="go('newsletter')">Internal Newsletters</button>
+          <button onclick="go('leave')">Leave Application</button>
+        </div>
+      </li>
+      <li><button data-p="policy" onclick="go('policy')">HR Policy</button></li>
+      <li class="hasdrop">
+        <button data-p="learning" onclick="go('learning')">Learning &#9662;</button>
+        <div class="dropdown">
+          <button onclick="go('motivation')">Motivation</button>
+          <button onclick="go('pm')">Project Management</button>
+          <button onclick="go('sales')">Sales</button>
+          <button onclick="go('softskills')">Soft Skills</button>
+        </div>
+      </li>
+      <li><button data-p="traincal" onclick="go('traincal')">Training Calendar</button></li>
+      <li><button data-p="trainfb" onclick="go('trainfb')">Training Feedback</button></li>
+      <li><button data-p="people" onclick="go('people')">People's Directory</button></li>
+    </ul>
+    <button class="ham" onclick="toggleMob()">&#9776;</button>
+  </div>
+</nav>
+<div class="mobmenu" id="mobmenu">
+  <button data-p="home" onclick="go('home');closeMob()">&#127968; Home</button>
+  <button data-p="automation" onclick="go('automation');closeMob()">&#9881; Automation</button>
+  <div class="mobsub">
+    <button onclick="go('delegation');closeMob()">Automated Delegation Sheet</button>
+    <button onclick="go('newsletter');closeMob()">Internal Newsletters</button>
+    <button onclick="go('leave');closeMob()">Leave Application</button>
+  </div>
+  <button data-p="policy" onclick="go('policy');closeMob()">&#128203; HR Policy</button>
+  <button data-p="learning" onclick="go('learning');closeMob()">&#127891; Learning</button>
+  <div class="mobsub">
+    <button onclick="go('motivation');closeMob()">Motivation</button>
+    <button onclick="go('pm');closeMob()">Project Management</button>
+    <button onclick="go('sales');closeMob()">Sales</button>
+    <button onclick="go('softskills');closeMob()">Soft Skills</button>
+  </div>
+  <button data-p="traincal" onclick="go('traincal');closeMob()">&#128197; Training Calendar</button>
+  <button data-p="trainfb" onclick="go('trainfb');closeMob()">&#128221; Training Feedback</button>
+  <button data-p="people" onclick="go('people');closeMob()">&#128101; People's Directory</button>
+</div>
+<div id="app">
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="ann"><div class="anni"><span class="apill">Notice</span><span style="font-size:13px;color:var(--mid)">Announcements Here!</span></div></div>
+  <section class="hero">
+    <div class="hr1"></div><div class="hr2"></div>
+    <div class="heroi">
+      <div>
+        <div class="heye">Human Resources Department</div>
+        <h1>Welcome to the <em>HR Department</em></h1>
+        <p>Our goal is to empower each and every employee so they can be the best in their field. Please don't hesitate to reach out to us.</p>
+        <div class="hcta">
+          <button class="btnp" onclick="go('policy')">HR Policy</button>
+          <button class="btno" onclick="go('people')">People's Directory</button>
+        </div>
+      </div>
+      <div class="ccard">
+        <div class="cavt">PM</div>
+        <h3>Pratyush Manjul Singh</h3>
+        <div class="crole">Manager, Human Resources &amp; EA</div>
+        <div class="cinfo">
+          <div class="crow"><svg class="cico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 4.18 2 2 0 015 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Mobile: +91 95111 10570</div>
+          <div class="crow"><svg class="cico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>hr@dkeparts.in</div>
+          <div class="crow"><svg class="cico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>ea@dkeparts.in</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cnt">
+    <div class="sh"><h2 class="st">Online Forms</h2></div>
+    <!-- Forms Tab Bar -->
+    <div style="display:flex;gap:3px;background:var(--white);border:1px solid var(--bdr);border-radius:9px;padding:4px;width:fit-content;margin-bottom:1.2rem;flex-wrap:wrap;">
+      <button class="fmtab active" onclick="switchForms(this,'frm-forms')" style="padding:6px 15px;border-radius:6px;font-size:13px;font-weight:500;border:none;background:var(--navy);color:#fff;cursor:pointer;">&#128221; Online Forms</button>
+      <button class="fmtab" onclick="switchForms(this,'frm-linktree')" style="padding:6px 15px;border-radius:6px;font-size:13px;font-weight:500;border:none;background:transparent;color:var(--muted);cursor:pointer;">&#127795; DPPL Link Tree</button>
+    </div>
+    <!-- Tab: Forms -->
+    <div id="frm-forms" style="display:block;">
+      <div class="fgrid">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfz0sI9D8GebGk40VfrHGueWWC4hOYn-11fnmEuJOt0SRHw7g/viewform" target="_blank" class="fi"><div class="fdot"></div><span class="fname">IT Asset Return</span><span class="farr">&#8594;</span></a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScYr8_WffMh87-g3BAbh8e1Cwj682PHrWCUl_0_xiUENM91ZQ/viewform" target="_blank" class="fi"><div class="fdot"></div><span class="fname">Loan Request</span><span class="farr">&#8594;</span></a>
+        <a href="https://forms.gle/wE8xfZCHRnMW1QJm7" target="_blank" class="fi"><div class="fdot"></div><span class="fname">Worker Recruitment Requisition</span><span class="farr">&#8594;</span></a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScPxyxhT3q0mHC7YdPmbeS6iFHjYSHAYmA1w-vSlhW8Tcmnfw/viewform" target="_blank" class="fi"><div class="fdot"></div><span class="fname">Tour Request</span><span class="farr">&#8594;</span></a>
+      </div>
+    </div>
+    <!-- Tab: DPPL Link Tree -->
+    <div id="frm-linktree" style="display:none;margin-bottom:2.5rem;">
+      <div style="background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;width:100%;min-height:650px;">
+        <iframe src="https://script.google.com/a/macros/dkeparts.in/s/AKfycbx8pfeicbHclQDpbB_B87a04TUsyNMXF3l6XAU3q8L90xRb3AccMpRtWVO7_rtmWfbMaw/exec" style="width:100%;min-height:650px;border:none;" title="DPPL Link Tree" allow="fullscreen"></iframe>
+      </div>
+    </div>
+    <div class="sh"><h2 class="st">Current Job Openings</h2></div>
+    <div class="jobmpty"><div class="ji">&#128269;</div><p>No current job openings.</p></div>
+    <div class="sh"><h2 class="st">Training Portal</h2></div>
+    <div class="tgrid">
+      <div class="tc" onclick="go('learning')"><div class="ttag tblue">Learning</div><h4>Training Content</h4><p>Motivation, Sales, Soft Skills &amp; Project Management</p></div>
+      <div class="tc" onclick="go('traincal')"><div class="ttag tamb">Schedule</div><h4>Training Calendar</h4><p>View all scheduled training sessions</p></div>
+      <div class="tc" onclick="go('trainfb')"><div class="ttag tgreen">Feedback</div><h4>Training Feedback</h4><p>Submit your post-training evaluation</p></div>
+    </div>
+    <div class="sh"><h2 class="st">Quick Links</h2></div>
+    <div class="cgrid">
+      <div class="card" onclick="go('policy')"><div class="cico2 ib">&#128203;</div><h3>HR Policy</h3><p>Attendance, Leave, OT &amp; Travel policies</p></div>
+      <div class="card" onclick="go('delegation')"><div class="cico2 ip">&#128193;</div><h3>Task Management</h3><p>Automated Delegation Sheet</p></div>
+      <div class="card" onclick="go('newsletter')"><div class="cico2 it">&#128240;</div><h3>Internal Newsletter</h3><p>Company news &amp; updates</p></div>
+      <div class="card" onclick="go('leave')"><div class="cico2 ig">&#128197;</div><h3>Leave Application</h3><p>Apply for leave online</p></div>
+    </div>
+    <div class="sh"><h2 class="st">HR Calendar</h2></div>
+    <div class="calembed">
+      <iframe src="https://www.google.com/calendar/embed?color=%23668CD9&showCalendars=1&showPrint=0&showTz=0&src=c_t2v4u8hsh7nn0trudd88mt4sc0@group.calendar.google.com" title="HR Calendar"></iframe>
+    </div>
+    <div class="sh"><h2 class="st">HR Minutes of the Meeting</h2><a class="sl" onclick="go('mom')">See all &#8594;</a></div>
+    <div class="momsec">
+      <div class="momdate">25th November 2020</div>
+      <ul class="momul">
+        <li class="momli"><span class="momn">1.</span>Weekly/Monthly Review</li>
+        <li class="momli"><span class="momn">2.</span>Must get Monthly/Quarterly Review for Sales Persons filled on priority</li>
+        <li class="momli"><span class="momn">3.</span>JD's to be checked as per Org Chart &#8212; Ongoing</li>
+      </ul>
+    </div>
+    <button class="btnp" style="margin-bottom:2.5rem" onclick="go('mom')">View Full Meeting Minutes &#8594;</button>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p><p>Contact: <a href="mailto:hr@dkeparts.in">hr@dkeparts.in</a> | <a href="mailto:ea@dkeparts.in">ea@dkeparts.in</a> | +91 95111 10570</p></footer>
+</div>
+
+<!-- AUTOMATION -->
+<div id="page-automation" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / Automation</div><h2>Automation</h2><p>Delegation sheets, newsletters and leave tools</p></div></div>
+  <div class="cnt">
+    <div class="cgrid">
+      <div class="card" onclick="go('delegation')"><div class="cico2 ip">&#128193;</div><h3>Automated Delegation Sheet</h3><p>Task delegation and tracking</p></div>
+      <div class="card" onclick="go('newsletter')"><div class="cico2 it">&#128240;</div><h3>Internal Newsletters</h3><p>Company communications and updates</p></div>
+      <div class="card" onclick="go('leave')"><div class="cico2 ig">&#128197;</div><h3>Leave Application</h3><p>Apply for leave online</p></div>
+    </div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- DELEGATION -->
+<div id="page-delegation" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / <a onclick="go('automation')">Automation</a> / Automated Delegation Sheet</div><h2>Automated Delegation Sheet</h2></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('automation')">&#8592; Back to Automation</button>
+    <div class="ibox"><span class="iii">&#128193;</span>This module provides an automated delegation sheet for task management.</div>
+    <a href="https://sites.google.com/dkeparts.in/dppl-hrportal/hr/automation/automated-delegation-sheet" target="_blank" class="fi" style="max-width:420px;padding:1rem 1.2rem;"><div class="fdot"></div><span class="fname">Open Automated Delegation Sheet</span><span class="farr">&#8594;</span></a>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- NEWSLETTER -->
+<div id="page-newsletter" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / <a onclick="go('automation')">Automation</a> / Internal Newsletters</div><h2>Internal Newsletters</h2><p>Company newsletters and updates</p></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('automation')">&#8592; Back to Automation</button>
+    <!-- TAB BAR -->
+    <div style="display:flex;gap:3px;background:var(--white);border:1px solid var(--bdr);border-radius:9px;padding:4px;width:fit-content;margin-bottom:1.4rem;">
+      <button class="nltab active" onclick="switchNL(this,'nl-grid')" style="padding:6px 16px;border-radius:6px;font-size:13px;font-weight:500;border:none;background:var(--navy);color:#fff;cursor:pointer;">&#128193; All Newsletters</button>
+      <button class="nltab" onclick="switchNL(this,'nl-list')" style="padding:6px 16px;border-radius:6px;font-size:13px;font-weight:500;border:none;background:transparent;color:var(--muted);cursor:pointer;">&#128506; Grid View</button>
+    </div>
+    <!-- GRID VIEW (default) -->
+    <div id="nl-grid" style="display:block;">
+      <div style="background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;width:100%;height:600px;">
+        <iframe src="https://drive.google.com/embeddedfolderview?id=1LDU4CntrVqbcVhRN4268nXtW0_ktrNve#grid" style="width:100%;height:100%;border:none;" title="Company Newsletters"></iframe>
+      </div>
+    </div>
+    <!-- LIST VIEW -->
+    <div id="nl-list" style="display:none;">
+      <div style="background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;width:100%;height:600px;">
+        <iframe src="https://drive.google.com/embeddedfolderview?id=1LDU4CntrVqbcVhRN4268nXtW0_ktrNve#list" style="width:100%;height:100%;border:none;" title="Company Newsletters List"></iframe>
+      </div>
+    </div>
+    <div style="margin-top:1rem">
+      <a href="https://docs.google.com/folderview?id=1LDU4CntrVqbcVhRN4268nXtW0_ktrNve" target="_blank" class="fi" style="max-width:320px;padding:.8rem 1.1rem;display:inline-flex;"><div class="fdot"></div><span class="fname">Open in Google Drive</span><span class="farr">&#8594;</span></a>
+    </div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- LEAVE APPLICATION -->
+<div id="page-leave" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / <a onclick="go('automation')">Automation</a> / Leave Application</div><h2>Leave Application</h2></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('automation')">&#8592; Back to Automation</button>
+    <div class="ibox"><span class="iii">&#128197;</span>Submit your leave application through the portal. Refer to the Leave Policy for eligibility and rules before applying.</div>
+    <a href="https://sites.google.com/dkeparts.in/dppl-hrportal/hr/automation/leave-application" target="_blank" class="fi" style="max-width:420px;padding:1rem 1.2rem;"><div class="fdot"></div><span class="fname">Open Leave Application</span><span class="farr">&#8594;</span></a>
+    <div style="margin-top:1.2rem"><button class="btnp" onclick="go('policy')">&#128203; View Leave Policy</button></div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- HR POLICY -->
+<div id="page-policy" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / HR Policy</div><h2>HR Policy</h2><p>All company policies and employee guidelines</p></div></div>
+  <div class="cnt">
+    <div class="ibox"><span class="iii">&#8505;</span>Policies are reviewed periodically. For clarifications contact <strong>hr@dkeparts.in</strong>. Click any policy to expand.</div>
+    <!-- ATTENDANCE -->
+    <div class="psec open">
+      <div class="psech" onclick="togglePol(this)"><div class="psec-icon">&#128336;</div><div class="psec-ti"><h4>Attendance Policy</h4></div><span class="psec-arr">&#9660;</span></div>
+      <div class="psec-body">
+        <h5>Purpose</h5>
+        <p>This policy outlines the attendance expectations for employees at DKE Parts Private Limited. Punctuality and regular attendance are vital for maintaining productivity, improving collaboration and providing excellent customer service.</p>
+        <p style="margin-top:.5rem">All employees are expected to be at their work stations, ready to start work at <strong>9:00 AM sharp until 6:30 PM</strong> each day.</p>
+        <h5>Scope</h5><p>This policy is applicable to all the employees of the company.</p>
+        <h5>Attendance &amp; Punctuality</h5>
+        <p>The General Office is open Monday through Saturday from 9:00 AM to 6:30 PM. The office is closed on Sundays. If an employee needs to be absent or late, they must notify their Department Head or HR by filling out an online form no more than 30 minutes before their start time.</p>
+        <h5>Penalty For Late Attendance</h5>
+        <ul>
+          <li>Employees are allowed to arrive late up to 3 times per month between 9:00 and 11:00 AM without penalty.</li>
+          <li>Employees are allowed to arrive late once per month up until 1:00 PM without penalty.</li>
+          <li>Employees are allowed to leave early once per month after 2:00 PM without penalty.</li>
+          <li>After 3 late arrivals in a month, the employee will receive a half-day leave deduction penalty.</li>
+          <li>Additional late arrivals beyond what is allowed per month will result in further disciplinary action.</li>
+        </ul>
+        <p style="margin-top:.5rem">If an employee does not have any paid leave or sick leave available, any used leave will be deducted from the following month's salary.</p>
+        <p style="margin-top:.4rem">In case an employee does not punch the card either at the time of reaching or leaving the office, she/he will be considered as absent for that particular day.</p>
+        <h5>Half Day Timings</h5><p>The minimum timings for a half day are &#8212; 9:00 to 1:00 or 2:00 to 6:30.</p>
+        <h5>Absence from duty during Official Tour</h5><p>If an employee needs to be absent from duty during an official tour, it is typically required to notify their Reporting Manager/HR providing a valid reason for the absence.</p>
+        <h5>Absence From Duty</h5>
+        <ul>
+          <li>Unapproved absence days will be counted as loss of pay (LOP) and the employee's pay will be deducted accordingly.</li>
+          <li>Upon returning to work after an unapproved absence, the employee must immediately report to their department head or HR and provide a written explanation.</li>
+          <li>If an employee is continuously absent for more than 5 days (including weekends/holidays), HR will send official correspondence requiring them to report back to duty.</li>
+          <li>If the employee does not respond within the stipulated time, it will be assumed they have voluntarily resigned and their employment will be terminated.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- MOBILE PHONE POLICY -->
+    <div class="psec">
+      <div class="psech" onclick="togglePol(this)"><div class="psec-icon">&#128241;</div><div class="psec-ti"><h4>Mobile Phone Policy</h4></div><span class="psec-arr">&#9660;</span></div>
+      <div class="psec-body">
+        <h5>Purpose</h5><p>To provide company-owned mobile phones to employees whose roles require direct communication with clients and vendors, ensuring professional and efficient business operations.</p>
+        <h5>Eligibility</h5><p>Phones will be issued strictly to employees who manage external communication with vendors/clients, or require mobility for field operations (usage more than 1 hour).</p>
+        <h5>Usage Guidelines</h5>
+        <ul><li>Phones are for official business use only</li><li>Personal use must be limited and reasonable</li><li>Unauthorized app installations are not allowed</li><li>International or roaming calls require prior written approval</li></ul>
+        <h5>Responsibility &amp; Return</h5>
+        <ul><li>Employees must ensure proper care and security of the device</li><li>Loss or damage must be reported to HR within 24 hours</li><li>Device must be returned upon resignation, transfer, or role change</li><li>Cost deduction will apply in case of loss or negligent damage</li></ul>
+        <h5>Monitoring &amp; Non-Compliance</h5>
+        <p>Usage will be monitored periodically. Misuse may lead to: (1) Verbal/Written Warning, (2) Cost Recovery. The company may install CRM applications, call recording apps and mobile monitoring tools.</p>
+        <h5>Loss, Theft, or Damage &#8212; Recovery Charges</h5>
+        <table class="ptable">
+          <tr><th>Device Age</th><th>Accidental Damage</th><th>Lost/Stolen (with FIR)</th><th>Negligence</th></tr>
+          <tr><td>0&#8211;6 months</td><td>50%</td><td>75%</td><td>100%</td></tr>
+          <tr><td>6&#8211;12 months</td><td>30%</td><td>50%</td><td>100%</td></tr>
+          <tr><td>12&#8211;24 months</td><td>15%</td><td>25%</td><td>50%</td></tr>
+          <tr><td>24+ months</td><td>No charge</td><td>10%</td><td>25%</td></tr>
+        </table>
+        <p style="font-size:12px;color:var(--muted);margin-top:.4rem">In case of theft, an FIR copy must be submitted within 48 hours. All recipients must sign an acknowledgment confirming receipt and acceptance of this policy.</p>
+        <a href="https://forms.gle/wcfpPtStBSgpCCjYA" target="_blank" class="formlink">&#128221; Form for Asset Issue or Return &#8594;</a>
+      </div>
+    </div>
+    <!-- LEAVE POLICY -->
+    <div class="psec">
+      <div class="psech" onclick="togglePol(this)"><div class="psec-icon">&#127958;</div><div class="psec-ti"><h4>Leave Policy</h4></div><span class="psec-arr">&#9660;</span></div>
+      <div class="psec-body">
+        <h5>1. Sick Leave (SL)</h5>
+        <ol>
+          <li>Employees are entitled to <strong>12 days of Sick Leave</strong> per calendar year.</li>
+          <li>Sick leave is only for the employee's own illness and cannot be used for a family member's health issues.</li>
+          <li>Sick Leave can be availed only after completion of the probation period and confirmation of employment.</li>
+          <li>Normally, no more than 3 consecutive days of Sick Leave may be taken at one time.</li>
+          <li>If Sick Leave exceeds 3 consecutive days, submission of a medical certificate to the HR Department is mandatory.</li>
+          <li>In case of casualty of an immediate family member (father, mother, spouse, or child), Sick Leave up to 6 days may be permitted, subject to submission of valid supporting documents and prior approval from HR and Management.</li>
+          <li>Sick Leave is not permitted for self-marriage or child birth and must be applied under the appropriate leave category.</li>
+          <li>If an employee does not have sufficient Sick Leave balance, Privilege Leave may be utilized.</li>
+          <li>If both Sick Leave and Privilege Leave balances are insufficient, the remaining absence will be treated as Leave Without Pay (LWP).</li>
+          <li>Any holiday or weekly off falling during a Sick Leave period will be counted as Sick Leave.</li>
+          <li>Unused Sick Leave will lapse on 31st December of each calendar year.</li>
+          <li>Employees must inform their reporting manager and HR on the first day of Sick Leave, through phone, message, or the HR portal.</li>
+        </ol>
+        <h5>2. Privilege Leave (PL) Policy</h5>
+        <ol>
+          <li>Employees are entitled to <strong>12 days of paid Privilege Leave (PL)</strong> per calendar year.</li>
+          <li>Privilege Leave must be applied for and approved in advance by Management.</li>
+          <li>National holidays, declared holidays, festival days, and weekends may be combined with Privilege Leave.</li>
+          <li>Any holidays falling during a period of Privilege Leave will be counted as Privilege Leave days.</li>
+          <li>Privilege Leave must be taken in full-day increments only; half-day PL is not permitted.</li>
+          <li>Employees may carry forward up to 12 unused Privilege Leave days to the next calendar year.</li>
+          <li>Any Privilege Leave taken beyond the annual entitlement of 12 days, without prior approval, will be treated as Unpaid Leave.</li>
+          <li>Employees may attend to personal work during office hours, provided the duration does not exceed 2 hours. After 2 hours it will be considered as half day leave.</li>
+          <li>If the Employee is not present in the office for more than 5 Hours, then it will be considered as a full day leave.</li>
+        </ol>
+        <h5>3. Late Coming &amp; Deduction Policy</h5>
+        <ol>
+          <li>Three (3) late arrivals &#8212; Warning / recorded as late</li>
+          <li>After 3rd Late, Every Late will result as Half-Day Deduction from PL/CL whatever applicable.</li>
+        </ol>
+        <h5>Paternity Leave</h5>
+        <ol>
+          <li>Employees have the right to a 7-day leave.</li>
+          <li>In order to be eligible, an employee must have completed a minimum of 80 days of service within the 12 months leading up to the expected birth or adoption date.</li>
+          <li>The leave can be used within six months following the birth or adoption of a child.</li>
+          <li>Failure to utilize the leave within the specified timeframe will result in it being considered forfeited.</li>
+          <li>Paternity leave is distinct from other types of leave, and it does not impact an employee's leave balance.</li>
+          <li>Employers are not permitted to reject an employee's request for paternity leave.</li>
+        </ol>
+        <h5>Cancellation of Leave</h5>
+        <p>A department head may revoke approved leave if required by business needs or situations. If an employee proceeds to take leave that has been canceled, those days will be treated as unapproved absences.</p>
+        <h5>Extension of Leave</h5>
+        <p>Employees must obtain approval in advance for any extension of leave. To extend leave, the employee should apply to their department head well in advance. If an employee takes leave beyond the approved period without sanctioned extension, those days will be treated as unapproved absences.</p>
+        <h5>Reschedule of Leave</h5>
+        <p>To maintain operational efficiency, the general policy is that only one employee per department may take leave at the same time. The Managing Director, HR department, or Reporting Manager can deny or reschedule leave requests if there is a conflict between two employees from the same department.</p>
+        <h5>Exception</h5>
+        <p>This leave policy is subject to change, amendment, or alteration by management at any time based on business or legal requirements. For any policy clarification, the interpretation of the HR department or the Managing Director shall be final.</p>
+      </div>
+    </div>
+    <!-- OT POLICY -->
+    <div class="psec">
+      <div class="psech" onclick="togglePol(this)"><div class="psec-icon">&#9201;</div><div class="psec-ti"><h4>OT Policy &#8212; Compensation Leave</h4></div><span class="psec-arr">&#9660;</span></div>
+      <div class="psec-body">
+        <p>Employees who work on weekends or holidays are eligible for compensation leave as follows:</p>
+        <table class="ptable" style="margin-top:.7rem">
+          <tr><th>Hours Worked</th><th>Entitlement</th></tr>
+          <tr><td>Less than 3 hours</td><td>Not eligible for comp leave; eligible for minimum conveyance allowance if approved by manager</td></tr>
+          <tr><td>3&#8211;5 hours</td><td>Half-day compensation leave</td></tr>
+          <tr><td>Over 5 hours</td><td>One full-day compensation leave</td></tr>
+        </table>
+        <ul style="margin-top:.7rem">
+          <li>Compensation leave expires in 60 days and must be used within 60 days of the date worked (inclusive).</li>
+          <li>Compensation leave cannot be encashed, transferred, or accumulated.</li>
+          <li>Compensation leave requires prior approval from manager/HR. If not approved, leave will be treated as non-medical leave.</li>
+          <li>Only one employee per department can take compensation leave at a time.</li>
+          <li>Employees must mention "compensation leave" when submitting online leave applications.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- TRAVEL POLICY -->
+    <div class="psec">
+      <div class="psech" onclick="togglePol(this)"><div class="psec-icon">&#9992;</div><div class="psec-ti"><h4>Travel &amp; Tour Policy</h4></div><span class="psec-arr">&#9660;</span></div>
+      <div class="psec-body">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:.8rem">This Travel Policy is applicable to all employees traveling for official business.</p>
+        <h5>1. Travel Authorization</h5>
+        <ul>
+          <li>All official travel must be pre-approved by the reporting manager.</li>
+          <li>Employees must submit a travel request with estimated expenses before departure through the Google Form.</li>
+        </ul>
+        <h5>2. Travel Allowances</h5>
+        <h6>A. Transportation</h6>
+        <ul>
+          <li>Air Travel: Economy class (allowed only in special cases)</li>
+          <li>Train Travel: Sleeper class for junior staff; 3rd AC Economy for mid-level employees; 3rd AC for senior-level employees</li>
+          <li>Rapido Bike / Taxi / Car Rental: Allowed for local travel at the destination; Receipts are mandatory</li>
+          <li>Public Transport (Metro / Bus / Auto): Reimbursed on actuals; Receipts required</li>
+        </ul>
+        <h6>B. Accommodation</h6>
+        <p>Budget accommodation will be booked by the office. In special cases, if employees book on their own, prior approval from management is mandatory.</p>
+        <h6>C. Daily Allowance (Food &amp; Incidental Expenses)</h6>
+        <table class="ptable">
+          <tr><th>Level</th><th>Per Day Allowance</th></tr>
+          <tr><td>Junior Staff</td><td>&#8377;500</td></tr>
+          <tr><td>Mid-Level Employees</td><td>&#8377;700</td></tr>
+          <tr><td>Senior-Level Employees</td><td>&#8377;1,000</td></tr>
+        </table>
+        <h6>D. Other Expenses</h6>
+        <p>Minor official expenses will be reimbursed on actuals against bills (receipts required).</p>
+        <h5>3. Reimbursement Process</h5>
+        <ul>
+          <li>All claims must be submitted within 7 days of return with valid receipts.</li>
+          <li>Expense reports must be approved by the reporting manager before processing.</li>
+          <li>Advances can be provided if pre-approved and must be properly settled after return.</li>
+        </ul>
+        <h5>4. Non-Reimbursable Expenses</h5>
+        <p>Personal expenses will not be covered by the company.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScPxyxhT3q0mHC7YdPmbeS6iFHjYSHAYmA1w-vSlhW8Tcmnfw/viewform" target="_blank" class="formlink">&#128221; Tour Request Form &#8594;</a>
+      </div>
+    </div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p><p><a href="mailto:hr@dkeparts.in">hr@dkeparts.in</a> | <a href="mailto:ea@dkeparts.in">ea@dkeparts.in</a></p></footer>
+</div>
+
+<!-- LEARNING -->
+<div id="page-learning" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / Learning</div><h2>Learning</h2><p>Training content and skill-building resources</p></div></div>
+  <div class="cnt">
+    <div class="cgrid">
+      <div class="card" onclick="go('motivation')"><div class="cico2 ip">&#127775;</div><h3>Motivation</h3><p>Best motivational videos for employees</p></div>
+      <div class="card" onclick="go('sales')"><div class="cico2 it">&#128188;</div><h3>Sales</h3><p>Sales techniques, scripts and best practices</p></div>
+      <div class="card" onclick="go('softskills')"><div class="cico2 ib">&#129504;</div><h3>Soft Skills</h3><p>Communication, leadership and interpersonal skills</p></div>
+      <div class="card" onclick="go('pm')"><div class="cico2 ig">&#128202;</div><h3>Projects Management</h3><p>PM tools, methods and templates</p></div>
+    </div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- MOTIVATION -->
+<div id="page-motivation" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / <a onclick="go('learning')">Learning</a> / Motivation</div><h2>Motivation</h2></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('learning')">&#8592; Back to Learning</button>
+    <div class="ibox"><span class="iii">&#127775;</span>Curated motivational content to inspire and energise your team.</div>
+    <a href="https://sites.google.com/dkeparts.in/dppl-hrportal/hr/learning/best-motivation-videos" target="_blank" class="fi" style="max-width:420px;padding:1rem 1.2rem;"><div class="fdot"></div><span class="fname">Open Motivation Videos Library</span><span class="farr">&#8594;</span></a>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- SALES -->
+<div id="page-sales" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / <a onclick="go('learning')">Learning</a> / Sales</div><h2>Sales</h2></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('learning')">&#8592; Back to Learning</button>
+    <div class="ibox"><span class="iii">&#128188;</span>Sales techniques, objection handling, closing scripts and customer relationship content.</div>
+    <a href="https://sites.google.com/dkeparts.in/dppl-hrportal/hr/learning/sales" target="_blank" class="fi" style="max-width:420px;padding:1rem 1.2rem;"><div class="fdot"></div><span class="fname">Open Sales Training Content</span><span class="farr">&#8594;</span></a>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- SOFT SKILLS -->
+<div id="page-softskills" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / <a onclick="go('learning')">Learning</a> / Soft Skills</div><h2>Soft Skills</h2></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('learning')">&#8592; Back to Learning</button>
+    <div class="ibox"><span class="iii">&#129504;</span>Build essential workplace skills &#8212; communication, presentations and leadership development.</div>
+    <a href="https://sites.google.com/dkeparts.in/dppl-hrportal/hr/learning/soft" target="_blank" class="fi" style="max-width:420px;padding:1rem 1.2rem;"><div class="fdot"></div><span class="fname">Open Soft Skills Content</span><span class="farr">&#8594;</span></a>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- PROJECT MANAGEMENT -->
+<div id="page-pm" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / <a onclick="go('learning')">Learning</a> / Project Management</div><h2>Projects Management</h2></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('learning')">&#8592; Back to Learning</button>
+    <div class="ibox"><span class="iii">&#128202;</span>Project planning, execution and delivery &#8212; tools, frameworks and best practices.</div>
+    <a href="https://sites.google.com/dkeparts.in/dppl-hrportal/hr/learning/project-management" target="_blank" class="fi" style="max-width:420px;padding:1rem 1.2rem;"><div class="fdot"></div><span class="fname">Open Project Management Content</span><span class="farr">&#8594;</span></a>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- TRAINING CALENDAR -->
+<div id="page-traincal" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / Training Calendar</div><h2>Training Calendar</h2><p>All scheduled training sessions</p></div></div>
+  <div class="cnt">
+    <div class="ibox"><span class="iii">&#128197;</span>The training calendar is maintained in Google Sheets. Click below to view all upcoming and past sessions.</div>
+    <a href="https://docs.google.com/spreadsheets/d/1CGx_u08k8ZIYUFoHge8F1L3PuNJPK8Y9tSgPGgtpg4I/edit" target="_blank" class="fi" style="max-width:460px;padding:1rem 1.2rem;"><div class="fdot"></div><span class="fname">&#128202; Open Training Calendar (Google Sheets)</span><span class="farr">&#8594;</span></a>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- TRAINING FEEDBACK -->
+<div id="page-trainfb" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / Training Feedback</div><h2>Training Feedback</h2><p>Sample Training Feedback Form (Created Using Form Mule &amp; Google Forms)</p></div></div>
+  <div class="cnt">
+    <div class="ibox"><span class="iii">&#128221;</span>Submit your training feedback using the embedded form below.</div>
+    <div style="background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;width:100%;min-height:620px;">
+      <iframe src="https://www.gstatic.com/atari/embeds/05acf2f48052137958a41565358fb972/intermediate-frame-minified.html" style="width:100%;min-height:620px;border:none;" title="Training Feedback Form"></iframe>
+    </div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- PEOPLE'S DIRECTORY -->
+<div id="page-people" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / People's Directory</div><h2>People's Directory</h2><p>Find colleagues, departments and contact information</p></div></div>
+  <div class="cnt">
+    <div style="background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;width:100%;min-height:700px;">
+      <iframe src="https://script.google.com/a/macros/dkeparts.in/s/AKfycbxMotNAsJ1qlFiX9YbmL71k8vXfxZNqzpla9My5l_7ki_PW9YHgesA3ipjQ7dJ7PmIz/exec" style="width:100%;min-height:700px;border:none;" title="People's Directory" allow="fullscreen"></iframe>
+    </div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p></footer>
+</div>
+
+<!-- FULL MOM -->
+<div id="page-mom" class="page">
+  <div class="pbanner"><div class="pbanneri"><div class="pcrumb"><a onclick="go('home')">Home</a> / HR Minutes of the Meeting</div><h2>HR Minutes of the Meeting</h2></div></div>
+  <div class="cnt">
+    <button class="backbtn" onclick="go('home')">&#8592; Back to Home</button>
+    <div class="momsec">
+      <div class="momdate">4th November 2020</div>
+      <ul class="momul">
+        <li class="momli"><span class="momn">1.</span>JD's to be checked as per Org Chart</li>
+        <li class="momli"><span class="momn">2.</span>Same for Interview Q's</li>
+        <li class="momli"><span class="momn">3.</span>Review &amp; Close all old pending HR\Admin tasks</li>
+        <li class="momli"><span class="momn">4.</span>Quarterly Plan for Perf Review in July-Aug-Sept</li>
+        <li class="momli"><span class="momn">5.</span>Weekly Review to be sent by Email as per new format</li>
+        <li class="momli"><span class="momn">6.</span>Monthly Review to be sent by Email as per new format</li>
+      </ul>
+    </div>
+    <div class="momsec">
+      <div class="momdate">11th November 2020</div>
+      <ul class="momul">
+        <li class="momli"><span class="momn">1.</span>Priorities / Tasks:<ul class="momsub"><li>Finalize the Perf FB for all Teams incl Sales &#8212; Revised the Traffic Lights for Eng\Technicians</li><li>Monthly HR review</li><li>Salary sheet completion</li><li>IREO compliances meeting with them</li><li>Appraisal list final touches</li><li>Joining &#8212; Sanjay Dubey</li><li>Salary helpdesk</li><li>Work on Induction merge</li><li>TIIT profiles</li><li>PayTm/Sodexo food wallet initiation</li><li>Update policies in Intranet</li><li>Softskills Training &#8212; find out potential trainers</li><li>TIIT salary online transfer</li><li>Dharamveer Daily 300km updown &amp; replacement of Ashish</li><li>Do the Training on DISC Evaluation</li><li>Improve ORG Chart</li><li>Time Punching to be Rectified</li></ul></li>
+        <li class="momli"><span class="momn">2.</span>Recruitments: 2 New Positions for TIIT (Tech &amp; Sales), TNS &#8212; Bid Manager, Engineer (repl of Ashish)</li>
+        <li class="momli"><span class="momn">3.</span>Format for induction to be checked &amp; updated &#8212; Needs to be developed like a 6 month programme.</li>
+        <li class="momli"><span class="momn">4.</span>Speak to guys causing issue in Appraisals\Feedback and also finalise for all HOD's &amp; Teams</li>
+        <li class="momli"><span class="momn">5.</span>Training Process to be properly discussed and formalized</li>
+        <li class="momli"><span class="momn">6.</span>Entire HR Process to be Reviewed &amp; GAP's to be Identified and Goals made with Dates to fill the same. Also modify the format for MIS.</li>
+        <li class="momli"><span class="momn">7.</span>Speak to POOR PERFORMERS &#8212; Sudarshan, Nandlal Pandit, Sandeep, Akhlesh &amp; Preetam</li>
+        <li class="momli"><span class="momn">8.</span>ESTABLISH MEETING RHYTHM FOR ALL DEPARTMENTS.</li>
+      </ul>
+    </div>
+    <div class="momsec">
+      <div class="momdate">18th November 2020</div>
+      <ul class="momul">
+        <li class="momli"><span class="momn">1.</span>MIS Not ready for June 2018 &#8212; I have asked you to update the same.</li>
+        <li class="momli"><span class="momn">2.</span>You discussed policy for Laptop &amp; Exit &#8212; have finalised the same.</li>
+        <li class="momli"><span class="momn">3.</span>Remaining policy to be discussed today at 2pm.</li>
+      </ul>
+    </div>
+    <div class="momsec">
+      <div class="momdate">25th November 2020</div>
+      <ul class="momul">
+        <li class="momli"><span class="momn">1.</span>Weekly/Monthly Review</li>
+        <li class="momli"><span class="momn">2.</span>Must get Monthly/Quarterly Review for Sales Persons filled on priority</li>
+        <li class="momli"><span class="momn">3.</span>JD's to be checked as per Org Chart &#8212; Ongoing</li>
+        <li class="momli"><span class="momn">4.</span>Same for Interview Q's &#8212; Ongoing</li>
+        <li class="momli"><span class="momn">5.</span>Review &amp; Close all old pending HR\Admin tasks &#8212; Ongoing</li>
+        <li class="momli"><span class="momn">6.</span>Quarterly Plan for Perf Review in July-Aug-Sept &#8212; Done</li>
+        <li class="momli"><span class="momn">7.</span>Need to understand DISC profiling for use with our Employees.</li>
+      </ul>
+    </div>
+  </div>
+  <footer><p>&#169; DKE Parts Private Limited &#8212; HR Portal</p><p><a href="mailto:hr@dkeparts.in">hr@dkeparts.in</a> | <a href="mailto:ea@dkeparts.in">ea@dkeparts.in</a> | +91 95111 10570</p></footer>
+</div>
+
+</div>
+<script>
+function switchNL(btn, show){
+  document.querySelectorAll('.nltab').forEach(b=>{b.style.background='transparent';b.style.color='var(--muted)';b.classList.remove('active');});
+  btn.style.background='var(--navy)';btn.style.color='#fff';btn.classList.add('active');
+  ['nl-grid','nl-list'].forEach(id=>{var el=document.getElementById(id);if(el)el.style.display=(id===show)?'block':'none';});
+}
+function switchForms(btn, show){
+  document.querySelectorAll('.fmtab').forEach(b=>{b.style.background='transparent';b.style.color='var(--muted)';b.classList.remove('active');});
+  btn.style.background='var(--navy)';btn.style.color='#fff';btn.classList.add('active');
+  ['frm-forms','frm-linktree'].forEach(id=>{var el=document.getElementById(id);if(el)el.style.display=(id===show)?'block':'none';});
+}
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  var t=document.getElementById('page-'+p);
+  if(t){t.classList.add('active');window.scrollTo(0,0);}
+  document.querySelectorAll('.navlinks button,[data-p]').forEach(b=>{b.classList.toggle('active',b.dataset.p===p);});
+}
+function toggleMob(){document.getElementById('mobmenu').classList.toggle('open');}
+function closeMob(){document.getElementById('mobmenu').classList.remove('open');}
+function togglePol(h){h.closest('.psec').classList.toggle('open');}
+function searchPeo(v){var q=v.toLowerCase();document.querySelectorAll('#peogrid .peocard').forEach(c=>{c.style.display=c.dataset.n.includes(q)?'':'none';});}
+document.addEventListener('click',function(e){var m=document.getElementById('mobmenu');if(m.classList.contains('open')&&!e.target.closest('nav')&&!e.target.closest('.mobmenu'))closeMob();});
+</script>
+</body>
+</html>
